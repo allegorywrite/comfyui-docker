@@ -2,6 +2,15 @@
 
 このプロジェクトは、ComfyUIとカスタムノードを含むDocker環境を提供します。
 
+## セットアップ
+
+### 1. リポジトリのクローン
+
+```bash
+git clone --recursive git@github.com:allegorywrite/comfyui-docker.git
+cd comfyui-docker
+```
+
 ## 構成
 
 - `Dockerfile`: ComfyUIとカスタムノードを含むDockerイメージの定義
@@ -11,7 +20,7 @@
 
 ## 使用方法
 
-### 1. カスタムノードの設定
+### 2. カスタムノードの設定
 
 `custom_nodes.txt`ファイルを編集して、インストールしたいカスタムノードのGitHubリポジトリURLを追加してください。
 
@@ -21,7 +30,7 @@ https://github.com/kijai/ComfyUI-KJNodes.git
 # 新しいカスタムノードを追加する場合は、ここに追加
 ```
 
-### 2. ビルドと起動
+### 3. ビルドと起動
 
 ```bash
 # Dockerイメージをビルド
@@ -31,7 +40,7 @@ docker compose build
 docker compose up
 ```
 
-### 3. アクセス
+### 4. アクセス
 
 ブラウザで `http://localhost:8188` にアクセスしてComfyUIを使用できます。
 
