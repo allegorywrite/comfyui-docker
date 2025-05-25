@@ -1,0 +1,16 @@
+services:
+  comfyui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8188:8188"
+    volumes:
+      - ./input:/app/ComfyUI/input
+      - ./output:/app/ComfyUI/output
+      - ./models:/app/ComfyUI/models
+      - ./workflow:/app/ComfyUI/workflow
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    restart: unless-stopped 

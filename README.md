@@ -1,31 +1,62 @@
-# MyComfyUIサーバー
+# ComfyUI Docker Environment
 
-このプロジェクトは、Docker Composeを使用してComfyUIサーバーをセットアップします。<br>
-自分で使用するmodelやinput imageを設定することができます。
-## 前提条件
-- nvidia-driverがinstallされていること。
-```nvidia-smi```で確認。
-- Dockerがinstallされていること。
-```docker --version```で確認。
+このプロジェクトは、ComfyUIとカスタムノードを含むDocker環境を提供します。
 
-## セットアップ
-1. **モデルの一括ダウンロード**<br>
-   ダウンロードしたいモデルは`modles/input.json`に記述し、`download.py`スクリプトを使用してモデルをダウンロードします。<br>普通にダウンロードしてもいいです。
-   ```bash
-   python models/download.py
-   ```
-2. input imageはComfyUI-Managerがめっちゃ使いやすくなったのでいらなくなりました。
-## containerの起動
+## 構成
 
-   依存関係のセットアップとモデルのダウンロードが完了したら、以下のコマンドでComfyUIサーバーを起動します。
-   ```bash
-   docker compose up
-   ```
+- `Dockerfile`: ComfyUIとカスタムノードを含むDockerイメージの定義
+- `docker-compose.yml`: Docker Composeの設定
+- `custom_nodes.txt`: インストールするカスタムノードのリスト
+- `workflow/`: ワークフローファイルを格納するディレクトリ
 
-これにより、`compose.yml`ファイルに基づいてサーバーが初期化されます。
+## 使用方法
 
-## 補足情報
+### 1. カスタムノードの設定
 
-- **Composeファイル**: `compose.yml`はすべてのコンテナ依存関係を管理します。
-- **スクリプト**: `script/download.py`はサーバーに必要なモデルの自動ダウンロードを行います。
-- **inputフォルダ**: `input`フォルダには、comfyUIでinputに使用したいimageを置けます。
+`custom_nodes.txt`ファイルを編集して、インストールしたいカスタムノードのGitHubリポジトリURLを追加してください。
+
+```
+https://github.com/melMass/comfy_mtb.git
+https://github.com/kijai/ComfyUI-KJNodes.git
+# 新しいカスタムノードを追加する場合は、ここに追加
+```
+
+### 2. ビルドと起動
+
+```bash
+# Dockerイメージをビルド
+docker compose build
+
+# ComfyUIを起動
+docker compose up
+```
+
+### 3. アクセス
+
+ブラウザで `http://localhost:8188` にアクセスしてComfyUIを使用できます。
+
+## ディレクトリ構成
+
+- `input/`: 入力ファイル用（ホストとコンテナで共有）
+- `output/`: 出力ファイル用（ホストとコンテナで共有）
+- `models/`: モデルファイル用（ホストとコンテナで共有）
+- `workflow/`: ワークフローファイル（ホストとコンテナで共有）
+
+## デフォルトワークフロー
+
+`workflow/steerable-motion_smooth-n-steady0525.json` がデフォルトワークフローとして設定されます。
+ワークフローファイルはホスト側で編集でき、コンテナ再起動時に自動的に反映されます。
+
+## ワークフローファイルの管理
+
+- ワークフローファイルは `workflow/` ディレクトリに配置
+- `workflow/steerable-motion_smooth-n-steady0525.json` が存在する場合、自動的にデフォルトワークフローとして設定
+- ホスト側でワークフローファイルを編集後、コンテナを再起動すると変更が反映されます
+
+## カスタムノードの追加
+
+新しいカスタムノードを追加する場合：
+
+1. `custom_nodes.txt`にリポジトリURLを追加
+2. `docker compose build --no-cache` でイメージを再ビルド
+3. `docker compose up` で起動

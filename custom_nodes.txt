@@ -4,7 +4,6 @@ https://github.com/cubiq/ComfyUI_IPAdapter_plus.git
 https://github.com/jags111/efficiency-nodes-comfyui.git
 https://github.com/Fannovel16/ComfyUI-Frame-Interpolation.git
 https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git
-https://github.com/cubiq/ComfyUI_IPAdapter_plus
 https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet.git
 https://github.com/alt-key-project/comfyui-dream-project
-https://github.com/Derfuu/Derfuu_ComfyUI_ModdedNodes
+https://github.com/Derfuu/Derfuu_ComfyUI_ModdedNodes 
