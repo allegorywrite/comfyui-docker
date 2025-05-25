@@ -26,8 +26,8 @@ RUN while IFS= read -r repo_url; do \
     done < /tmp/custom_nodes.txt
 
 # templateで使用するモデルをダウンロード
-RUN curl -L -o ComfyUI/models/checkpoints/v1-5-pruned-emaonly.safetensors \
-    https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors
+# RUN curl -L -o ComfyUI/models/checkpoints/v1-5-pruned-emaonly.safetensors \
+#     https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors
 
 # ComfyUIの基本的な依存関係をインストール
 RUN cd ComfyUI && \
